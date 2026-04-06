@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>The Coffee Shop | Premium Heritage Coffee | Est. 1978</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Rye&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --chocolate-brown: #2D1E16;
+      --gold-copper: #C69C6D;
+      --cream-light: #F4ECD8;
+      --dark-warm: #3E2A1F;
+      --transition-premium: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+
+    body {
+      background-color: var(--chocolate-brown);
+      color: var(--cream-light);
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* Navigation - Premium Sidebar Style (Mobile-first but elegant) */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 3rem;
+      background: rgba(45, 30, 22, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(198, 156, 109, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-family: 'Rye', cursive;
+      font-size: 1.6rem;
+      color: var(--gold-copper);
+      text-decoration: none;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      transition: var(--transition-premium);
+    }
+
+    .nav-logo:hover {
+      text-shadow: 0 0 8px rgba(198,156,109,0.5);
+      transform: scale(1.02);
+    }
+
+    .nav-logo span {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+    }
+
+    /* SIDEBAR (Mobile & Desktop refined) */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 320px;
+      height: 100vh;
+      background: linear-gradient(135deg, #2a1d15 0%, #1f1510 100%);
+      backdrop-filter: blur(16px);
+      box-shadow: -8px 0 32px rgba(0,0,0,0.6);
+      z-index: 1000;
+      transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      padding: 2rem 1.5rem;
+      border-left: 2px solid rgba(198,156,109,0.4);
+    }
+
+    .sidebar.active {
+      right: 0;
+    }
+
+    .sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(198,156,109,0.3);
+    }
+
+    .sidebar-header h3 {
+      font-family: 'Rye', cursive;
+      color: var(--gold-copper);
+      font-size: 1.3rem;
+      letter-spacing: 2px;
+    }
+
+    .close-sidebar {
+      background: none;
+      border: none;
+      color: var(--gold-copper);
+      font-size: 1.8rem;
+      cursor: pointer;
+      transition: var(--transition-premium);
+    }
+
+    .close-sidebar:hover {
+      transform: rotate(90deg);
+      color: var(--cream-light);
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      flex: 1;
+    }
+
+    .sidebar-link {
+      color: var(--cream-light);
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: 500;
+      padding: 0.8rem 1rem;
+      border-radius: 50px;
+      transition: var(--transition-premium);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sidebar-link i {
+      width: 28px;
+      font-size: 1.2rem;
+      color: var(--gold-copper);
+      transition: var(--transition-premium);
+    }
+
+    /* Premium hover effect for sidebar buttons */
+    .sidebar-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(198,156,109,0.2), transparent);
+      transition: left 0.5s ease;
+      z-index: -1;
+    }
+
+    .sidebar-link:hover::before {
+      left: 100%;
+    }
+
+    .sidebar-link:hover {
+      background: rgba(198,156,109,0.15);
+      transform: translateX(8px);
+      letter-spacing: 0.5px;
+    }
+
+    .sidebar-link:hover i {
+      transform: scale(1.15);
+      color: var(--gold-copper);
+      text-shadow: 0 0 6px rgba(198,156,109,0.6);
+    }
+
+    /* Special CTA button in sidebar */
+    .sidebar-cta {
+      background: transparent;
+      border: 1.8px solid var(--gold-copper);
+      color: var(--gold-copper);
+      padding: 0.9rem;
+      border-radius: 50px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition-premium);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 1.5rem;
+      font-size: 1rem;
+    }
+
+    .sidebar-cta:hover {
+      background: var(--gold-copper);
+      color: var(--chocolate-brown);
+      transform: scale(1.02);
+      box-shadow: 0 6px 18px rgba(198,156,109,0.4);
+      gap: 14px;
+    }
+
+    /* Overlay when sidebar open */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(3px);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Desktop navigation links (hidden on mobile, visible on larger) */
+    .desktop-nav {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .desktop-nav a {
+      color: var(--cream-light);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition-premium);
+      position: relative;
+      padding: 0.5rem 0;
+    }
+
+    .desktop-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gold-copper);
+      transition: width 0.3s ease;
+    }
+
+    .desktop-nav a:hover::after {
+      width: 100%;
+    }
+
+    .desktop-nav a:hover {
+      color: var(--gold-copper);
+    }
+
+    .btn-order {
+      background: transparent;
+      border: 1.5px solid var(--gold-copper);
+      color: var(--gold-copper);
+      padding: 0.5rem 1.5rem;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: var(--transition-premium);
+    }
+
+    .btn-order:hover {
+      background: var(--gold-copper);
+      color: var(--chocolate-brown);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 12px rgba(198,156,109,0.3);
+    }
+
+    .mobile-menu {
+      display: none;
+      font-size: 1.8rem;
+      color: var(--gold-copper);
+      cursor: pointer;
+      transition: var(--transition-premium);
+    }
+
+    .mobile-menu:hover {
+      transform: scale(1.1);
+      text-shadow: 0 0 5px rgba(198,156,109,0.5);
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 5rem 2rem;
+      background: linear-gradient(135deg, rgba(45,30,22,0.95), rgba(62,42,31,0.9));
+    }
+
+    .hero-title {
+      font-family: 'Rye', cursive;
+      font-size: 4rem;
+      color: var(--gold-copper);
+      margin-bottom: 1rem;
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .hero-estd {
+      font-size: 1.2rem;
+      letter-spacing: 4px;
+      border-top: 1px solid var(--gold-copper);
+      border-bottom: 1px solid var(--gold-copper);
+      display: inline-block;
+      padding: 0.5rem 1.5rem;
+      margin-bottom: 2rem;
+      animation: fadeInUp 0.8s ease 0.1s backwards;
+    }
+
+    .coffee-icon {
+      font-size: 4rem;
+      color: var(--gold-copper);
+      margin: 1.5rem 0;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+
+    /* Section Titles */
+    .section-title {
+      text-align: center;
+      font-family: 'Rye', cursive;
+      font-size: 2rem;
+      color: var(--gold-copper);
+      margin-bottom: 2rem;
+    }
+
+    /* Menu Grid */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .menu-card {
+      background: rgba(62, 42, 31, 0.6);
+      border: 1px solid rgba(198, 156, 109, 0.3);
+      border-radius: 20px;
+      padding: 1.8rem;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--gold-copper);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+    }
+
+    .menu-header {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dotted var(--gold-copper);
+      padding-bottom: 0.8rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .menu-name {
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    .menu-price {
+      font-size: 1.3rem;
+      font-family: 'Rye', cursive;
+      color: var(--gold-copper);
+    }
+
+    .menu-desc {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    /* HORIZONTAL GALLERY */
+    .gallery-horizontal {
+      width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+      scroll-behavior: smooth;
+      cursor: grab;
+      user-select: none;
+      padding: 1rem 0 2rem 0;
+      scrollbar-width: thin;
+      scrollbar-color: var(--gold-copper) rgba(198,156,109,0.2);
+    }
+
+    .gallery-horizontal::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .gallery-horizontal::-webkit-scrollbar-track {
+      background: rgba(198,156,109,0.2);
+      border-radius: 10px;
+    }
+
+    .gallery-horizontal::-webkit-scrollbar-thumb {
+      background: var(--gold-copper);
+      border-radius: 10px;
+    }
+
+    .gallery-track {
+      display: inline-flex;
+      gap: 1.8rem;
+      padding: 0.5rem 1rem;
+    }
+
+    .gallery-card-h {
+      display: inline-block;
+      width: 320px;
+      flex-shrink: 0;
+      border-radius: 20px;
+      overflow: hidden;
+      background: rgba(62,42,31,0.4);
+      transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      opacity: 0;
+      transform: translateX(40px) scale(0.92);
+      animation: slideInCard 0.7s forwards;
+      animation-delay: calc(var(--order, 0) * 0.12s);
+      cursor: pointer;
+    }
+
+    @keyframes slideInCard {
+      to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+      }
+    }
+
+    .gallery-card-h:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 35px rgba(0,0,0,0.5);
+    }
+
+    .gallery-card-h img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      display: block;
+      filter: sepia(0.5) grayscale(0.6) brightness(0.85);
+      transition: all 0.5s ease;
+    }
+
+    .gallery-card-h:hover img {
+      filter: sepia(0) grayscale(0) brightness(1.05);
+      transform: scale(1.03);
+    }
+
+    .gallery-caption {
+      padding: 1rem;
+      text-align: center;
+      background: rgba(45,30,22,0.8);
+      color: var(--cream-light);
+      font-weight: 500;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      border-top: 1px solid rgba(198,156,109,0.4);
+      transition: background 0.3s;
+    }
+
+    .gallery-card-h:hover .gallery-caption {
+      background: rgba(198,156,109,0.2);
+      color: var(--gold-copper);
+    }
+
+    .gallery-nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .gallery-arrow {
+      background: rgba(198,156,109,0.2);
+      border: 1px solid var(--gold-copper);
+      color: var(--gold-copper);
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .gallery-arrow:hover {
+      background: var(--gold-copper);
+      color: var(--chocolate-brown);
+      transform: scale(1.1);
+    }
+
+    /* About Section */
+    .about-box {
+      background: rgba(62, 42, 31, 0.5);
+      border-left: 4px solid var(--gold-copper);
+      padding: 2rem;
+      border-radius: 20px;
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a1210;
+      padding: 3rem 2rem 2rem;
+      margin-top: 2rem;
+      border-top: 1px solid var(--gold-copper);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-col h4 {
+      font-family: 'Rye', cursive;
+      color: var(--gold-copper);
+      margin-bottom: 1rem;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-icons a {
+      color: var(--gold-copper);
+      font-size: 1.5rem;
+      transition: all 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: var(--cream-light);
+      transform: translateY(-3px);
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px dashed rgba(198, 156, 109, 0.3);
+    }
+
+    .badge {
+      font-family: 'Rye', cursive;
+      font-size: 0.7rem;
+      color: var(--gold-copper);
+      background: rgba(198, 156, 109, 0.1);
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 1rem 1.5rem;
+      }
+      .desktop-nav {
+        display: none;
+      }
+      .mobile-menu {
+        display: block;
+      }
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      .gallery-card-h {
+        width: 270px;
+      }
+      .gallery-card-h img {
+        height: 240px;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .sidebar, .overlay {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .gallery-card-h {
+        width: 240px;
+      }
+      .gallery-card-h img {
+        height: 200px;
+      }
+    }
+
+    /* Scroll Animation for sections */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.7s ease;
+    }
+    
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes subtlePulse {
+      0% { box-shadow: 0 0 0 0 rgba(198,156,109,0.4);}
+      70% { box-shadow: 0 0 0 10px rgba(198,156,109,0);}
+      100% { box-shadow: 0 0 0 0 rgba(198,156,109,0);}
+    }
+  </style>
+</head>
+<body>
+
+<!-- Premium Sidebar (Mobile) -->
+<div class="overlay" id="overlay"></div>
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <h3>☕ MENU</h3>
+    <button class="close-sidebar" id="closeSidebarBtn"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="sidebar-nav">
+    <a href="#menu" class="sidebar-link"><i class="fas fa-utensils"></i> Signature Menu</a>
+    <a href="#heritage" class="sidebar-link"><i class="fas fa-landmark"></i> Our Heritage</a>
+    <a href="#gallery" class="sidebar-link"><i class="fas fa-images"></i> Visual Chronicle</a>
+    <a href="#location" class="sidebar-link"><i class="fas fa-location-dot"></i> Visit Us</a>
+    <button class="sidebar-cta" id="sidebarReserveBtn"><i class="fas fa-calendar-check"></i> Reserve / Order Now</button>
+  </div>
+</div>
+
+<!-- Navigation Bar -->
+<nav class="navbar">
+  <a href="#" class="nav-logo">☕ THE COFFEE SHOP <span>EST. 1978</span></a>
+  <ul class="desktop-nav">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#heritage">Heritage</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#location">Location</a></li>
+    <li><button class="btn-order" id="desktopReserveBtn">Reserve / Order</button></li>
+  </ul>
+  <div class="mobile-menu" id="mobileMenuBtn">
+    <i class="fas fa-bars"></i>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero reveal">
+  <h1 class="hero-title">THE COFFEE SHOP</h1>
+  <div class="hero-estd">ESTD 1978</div>
+  <div class="coffee-icon">
+    <i class="fas fa-mug-hot"></i>
+  </div>
+  <p style="max-width: 600px; margin: 0 auto; font-size: 1.1rem;">Artisanal coffee since 1978 • Vienna's finest heritage roastery</p>
+</section>
+
+<!-- Menu Section -->
+<section id="menu" class="container reveal">
+  <h2 class="section-title">✦ Signature Selections ✦</h2>
+  <div class="menu-grid">
+    <div class="menu-card">
+      <div class="menu-header"><span class="menu-name">The Perfect Pour</span><span class="menu-price">$12</span></div>
+      <div class="menu-desc">Slow-drip single origin Ethiopian • Notes of dark cocoa & jasmine</div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-header"><span class="menu-name">Artisanal Blend</span><span class="menu-price">$14</span></div>
+      <div class="menu-desc">House roasted small-batch blend • Caramel & wild honey finish</div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-header"><span class="menu-name">Victorian Latte</span><span class="menu-price">$9</span></div>
+      <div class="menu-desc">Velvet foam • Gold-dusted cinnamon • Organic oat milk option</div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-header"><span class="menu-name">Heritage Cold Brew</span><span class="menu-price">$11</span></div>
+      <div class="menu-desc">24-hour steeped • Smooth low-acid profile • Served over amber ice</div>
+    </div>
+  </div>
+</section>
+
+<!-- Heritage Section -->
+<section id="heritage" class="container reveal">
+  <h2 class="section-title">✦ Our Heritage ✦</h2>
+  <div class="about-box">
+    <i class="fas fa-quote-left" style="font-size: 2rem; color: var(--gold-copper); opacity: 0.6;"></i>
+    <p style="margin-top: 1rem; font-size: 1.1rem; line-height: 1.6;">
+      For over four decades, The Coffee Shop has been a sanctuary for coffee purists. 
+      Our beans are ethically sourced from family farms, slow-roasted to evoke deep 
+      chocolate and warm spice notes, served in an ambiance that whispers vintage elegance.
+    </p>
+    <div style="margin-top: 1.5rem;">
+      <i class="fas fa-award" style="color: var(--gold-copper);"></i>
+      <span style="margin-left: 0.5rem;">Premium Quality Since 1978</span>
+    </div>
+  </div>
+</section>
+
+<!-- Horizontal Gallery Section -->
+<section id="gallery" class="container reveal">
+  <h2 class="section-title">✦ Visual Chronicle ✦</h2>
+  <div class="gallery-horizontal" id="horizontalGallery">
+    <div class="gallery-track" id="galleryTrack">
+      <div class="gallery-card-h" style="--order: 0;"><img src="https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vintage interior"><div class="gallery-caption">✦ Heritage Interior ✦</div></div>
+      <div class="gallery-card-h" style="--order: 1;"><img src="https://images.pexels.com/photos/851555/pexels-photo-851555.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pour over"><div class="gallery-caption">✦ The Perfect Pour ✦</div></div>
+      <div class="gallery-card-h" style="--order: 2;"><img src="https://images.pexels.com/photos/2253643/pexels-photo-2253643.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Coffee beans"><div class="gallery-caption">✦ Artisanal Roast ✦</div></div>
+      <div class="gallery-card-h" style="--order: 3;"><img src="https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Leather chairs"><div class="gallery-caption">✦ Cozy Corners ✦</div></div>
+      <div class="gallery-card-h" style="--order: 4;"><img src="https://images.pexels.com/photos/7658490/pexels-photo-7658490.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Ceramic set"><div class="gallery-caption">✦ Vintage Serveware ✦</div></div>
+      <div class="gallery-card-h" style="--order: 5;"><img src="https://images.pexels.com/photos/905497/pexels-photo-905497.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Espresso machine"><div class="gallery-caption">✦ Timeless Machine ✦</div></div>
+    </div>
+  </div>
+  <div class="gallery-nav">
+    <div class="gallery-arrow" id="scrollLeftArrow"><i class="fas fa-chevron-left"></i></div>
+    <div class="gallery-arrow" id="scrollRightArrow"><i class="fas fa-chevron-right"></i></div>
+  </div>
+</section>
+
+<!-- Location Section -->
+<section id="location" class="container reveal">
+  <h2 class="section-title">✦ Visit Us ✦</h2>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+    <div style="background: rgba(62,42,31,0.5); padding: 1.5rem; border-radius: 15px;"><i class="fas fa-map-marker-alt" style="font-size: 2rem; color: var(--gold-copper); margin-bottom: 1rem; display: inline-block;"></i><h3>Address</h3><p>47 Old Bean Lane<br>Vienna 1010, Austria</p></div>
+    <div style="background: rgba(62,42,31,0.5); padding: 1.5rem; border-radius: 15px;"><i class="fas fa-clock" style="font-size: 2rem; color: var(--gold-copper); margin-bottom: 1rem; display: inline-block;"></i><h3>Hours</h3><p>Mon-Fri: 7:30 - 19:00<br>Sat-Sun: 8:00 - 18:00</p></div>
+    <div style="background: rgba(62,42,31,0.5); padding: 1.5rem; border-radius: 15px;"><i class="fas fa-phone" style="font-size: 2rem; color: var(--gold-copper); margin-bottom: 1rem; display: inline-block;"></i><h3>Contact</h3><p>+43 (0) 123 456 789<br>hello@thecoffeeshop.com</p></div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-col"><h4>✧ The Coffee Shop ✧</h4><p>Premium heritage roastery</p><p>Est. 1978 • Vienna</p></div>
+    <div class="footer-col"><h4>✦ Connect ✦</h4><div class="social-icons"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-pinterest"></i></a></div></div>
+    <div class="footer-col"><h4>✻ Newsletter ✻</h4><p>Subscribe for exclusive offers</p><button class="btn-order" id="newsletterBtn">Subscribe</button></div>
+  </div>
+  <div class="badge-row"><span class="badge">ESTD 1978</span><span class="badge">✦ PREMIUM BLENDS ✦</span><span class="badge">ESTD 1978</span><span class="badge">✦ SINCE 1978 ✦</span><span class="badge">ESTD 1978</span></div>
+  <div style="text-align: center; margin-top: 2rem; font-size: 0.75rem; opacity: 0.6;">© 2024 THE COFFEE SHOP — Heritage Roast Masters.</div>
+</footer>
+
+<script>
+  // SIDEBAR LOGIC (Premium)
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('overlay');
+  const closeSidebarBtn = document.getElementById('closeSidebarBtn');
+
+  function openSidebar() {
+    sidebar.classList.add('active');
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSidebar() {
+    sidebar.classList.remove('active');
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', openSidebar);
+  if (closeSidebarBtn) closeSidebarBtn.addEventListener('click', closeSidebar);
+  if (overlay) overlay.addEventListener('click', closeSidebar);
+
+  // Close sidebar when clicking sidebar links
+  const sidebarLinks = document.querySelectorAll('.sidebar-link');
+  sidebarLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      closeSidebar();
+      const targetId = link.getAttribute('href');
+      if (targetId && targetId !== '#') {
+        const targetEl = document.querySelector(targetId);
+        if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Scroll reveal
+  const revealElements = document.querySelectorAll('.reveal');
+  function checkReveal() {
+    revealElements.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 100) el.classList.add('active');
+    });
+  }
+  window.addEventListener('scroll', checkReveal);
+  window.addEventListener('load', checkReveal);
+
+  // Horizontal gallery drag and arrows
+  const galleryContainer = document.getElementById('horizontalGallery');
+  const leftArrow = document.getElementById('scrollLeftArrow');
+  const rightArrow = document.getElementById('scrollRightArrow');
+  let isDown = false, startX, scrollLeftPos;
+
+  if (galleryContainer) {
+    galleryContainer.addEventListener('mousedown', (e) => { isDown = true; galleryContainer.style.cursor = 'grabbing'; startX = e.pageX - galleryContainer.offsetLeft; scrollLeftPos = galleryContainer.scrollLeft; });
+    galleryContainer.addEventListener('mouseleave', () => { isDown = false; galleryContainer.style.cursor = 'grab'; });
+    galleryContainer.addEventListener('mouseup', () => { isDown = false; galleryContainer.style.cursor = 'grab'; });
+    galleryContainer.addEventListener('mousemove', (e) => { if (!isDown) return; e.preventDefault(); const x = e.pageX - galleryContainer.offsetLeft; const walk = (x - startX) * 1.5; galleryContainer.scrollLeft = scrollLeftPos - walk; });
+    galleryContainer.addEventListener('touchstart', (e) => { isDown = true; startX = e.touches[0].pageX - galleryContainer.offsetLeft; scrollLeftPos = galleryContainer.scrollLeft; });
+    galleryContainer.addEventListener('touchend', () => { isDown = false; });
+    galleryContainer.addEventListener('touchmove', (e) => { if (!isDown) return; const x = e.touches[0].pageX - galleryContainer.offsetLeft; const walk = (x - startX) * 1.2; galleryContainer.scrollLeft = scrollLeftPos - walk; });
+    galleryContainer.style.cursor = 'grab';
+  }
+
+  if (leftArrow) leftArrow.addEventListener('click', () => galleryContainer.scrollBy({ left: -320, behavior: 'smooth' }));
+  if (rightArrow) rightArrow.addEventListener('click', () => galleryContainer.scrollBy({ left: 320, behavior: 'smooth' }));
+
+  // Buttons
+  const reserveActions = () => alert('✨ Thank you! Our reservation team will contact you shortly to confirm your table. ✨');
+  document.getElementById('desktopReserveBtn')?.addEventListener('click', reserveActions);
+  document.getElementById('sidebarReserveBtn')?.addEventListener('click', () => { closeSidebar(); reserveActions(); });
+  document.getElementById('newsletterBtn')?.addEventListener('click', () => alert('📧 Join our heritage circle! Exclusive coffee stories.'));
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); closeSidebar(); }
+    });
+  });
+</script>
+</body>
+  </html>
